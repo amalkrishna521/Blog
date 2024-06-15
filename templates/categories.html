@@ -1,0 +1,28 @@
+{% extends 'basic.html' %}
+{% block content %}
+
+{% if category_posts %}
+    <h1>{{ cats }}</h1>
+    <ul>
+    {% for post in category_posts %}
+        <li>
+            <a href="{% url 'article_details' post.pk %}">
+                - {{ post.title }}</a>
+                - {{ post.category }}
+                - {{ post.author.first_name }} 
+                {{ post.author.last_name }} - 
+                {{ post.post_date }}
+                <small>
+                    <a href="{% url 'update_post' post.pk %}" style="color: blue; text-decoration: none;">[Edit]</a>
+                    <a href="{% url 'delete_post' post.pk %}" style="color: red; text-decoration: none;">[Delete]</a>
+                </small>
+                <br>
+                {{ post.body }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h1>sorry this page does not exist!!!!!</h1>
+{% endif %}
+
+{% endblock %}
